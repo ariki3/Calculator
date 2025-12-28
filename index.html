@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kenya PAYE Calculator 2026</title>
+<meta name="description" content="Free accurate Kenya PAYE & Net Salary Calculator 2026 - Includes NSSF, SHIF, Housing Levy, reliefs, and extra deductions. Matches real payslips.">
+<meta name="keywords" content="Kenya PAYE calculator 2026, net salary Kenya, KRA tax calculator, NSSF SHIF Housing Levy 2026">
+<meta name="author" content="Your Name or Site Name">
+<meta property="og:title" content="Kenya PAYE Calculator 2026">
+<meta property="og:description" content="Calculate your take-home pay accurately with 2026 rules.">
+<meta property="og:type" content="website">
+<!-- For mobile optimization (already have viewport, but add if needed) -->
+    <!-- Bootstrap 5 CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body { background: #f8f9fa; padding: 20px 10px; }
+        h1 { text-align: center; margin-bottom: 30px; color: #212529; }
+        .form-section, .results-section {
+            background: #ffffff;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            height: fit-content;
+        }
+        .results-section {
+            background: #e3f2fd;
+        }
+        h3 { margin-top: 0; margin-bottom: 20px; color: #1976d2; }
+        .result-row {
+            padding: 8px 0;
+            border-bottom: 1px solid #bbdefb;
+        }
+        .result-row:last-child {
+            border-bottom: none;
+            font-weight: bold;
+            font-size: 1.1em;
+            color: #d32f2f;
+        }
+        .result-label {
+            font-weight: bold;
+            color: #424242;
+        }
+        .result-value {
+            text-align: right;
+            font-family: 'Courier New', monospace;
+        }
+        .btn-calculate {
+            margin-top: 20px;
+            padding: 12px;
+            font-size: 1.1em;
+        }
+        .disclaimer {
+            font-size: 0.85em;
+            color: #6c757d;
+            margin-top: 20px;
+            padding: 10px;
+            background: #fff3cd;
+            border-radius: 6px;
+        }
+        @media (max-width: 768px) {
+            .form-section, .results-section {
+                margin-bottom: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Kenya PAYE & Net Salary Calculator 2026</h1>
+
+        <div class="row g-4">
+            <!-- Left: Input Form -->
+            <div class="col-lg-6 col-12">
+                <div class="form-section">
+                    <form id="calculatorForm">
+                        <h3>Regular Earnings</h3>
+                        <div class="row mb-3">
+                            <label for="basicPay" class="col-sm-7 col-form-label">Basic Pay:</label>
+                            <div class="col-sm-5">
+                                <input type="number" class="form-control" id="basicPay" value="40900">
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="commuterAllowance" class="col-sm-7 col-form-label">Commuter & Fuel Allowance:</label>
+                            <div class="col-sm-5">
+                                <input type="number" class="form-control" id="commuterAllowance" value="0">
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="housingAllowance" class="col-sm-7 col-form-label">Housing Allowance:</label>
+                            <div class="col-sm-5">
+                                <input type="number" class="form-control" id="housingAllowance" value="0">
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="otherRegular" class="col-sm-7 col-form-label">Other Regular Taxable Allowances:</label>
+                            <div class="col-sm-5">
+                                <input type="number" class="form-control" id="otherRegular" value="0">
+                            </div>
+                        </div>
+
+                        <h3>Irregular Earnings</h3>
+                        <div class="row mb-3">
+                            <label for="leaveAllowance" class="col-sm-7 col-form-label">Leave Allowance / Bonus:</label>
+                            <div class="col-sm-5">
+                                <input type="number" class="form-control" id="leaveAllowance" value="0">
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="otherIrregular" class="col-sm-7 col-form-label">Other Irregular:</label>
+                            <div class="col-sm-5">
+                                <input type="number" class="form-control" id="otherIrregular" value="0">
+                            </div>
+                        </div>
+
+                        <h3>Other Reliefs</h3>
+                        <div class="row mb-3">
+                            <label for="pension" class="col-sm-7 col-form-label">Pension Contribution (max 30,000):</label>
+                            <div class="col-sm-5">
+                                <input type="number" class="form-control" id="pension" value="0">
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="mortgage" class="col-sm-7 col-form-label">Mortgage Interest (max 30,000):</label>
+                            <div class="col-sm-5">
+                                <input type="number" class="form-control" id="mortgage" value="0">
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="pensionOverride" class="col-sm-7 col-form-label">Pensionable Pay Override:</label>
+                            <div class="col-sm-5">
+                                <input type="number" class="form-control" id="pensionOverride" value="0" placeholder="0 = auto">
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="insurance" class="col-sm-7 col-form-label">Insurance Premiums Paid:</label>
+                            <div class="col-sm-5">
+                                <input type="number" class="form-control" id="insurance" value="0">
+                            </div>
+                        </div>
+
+                        <h3>Extra Deductions</h3>
+                        <div class="row mb-3">
+                            <label for="helb" class="col-sm-7 col-form-label">HELB Loan Repayment:</label>
+                            <div class="col-sm-5">
+                                <input type="number" class="form-control" id="helb" value="1862">
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="statPension" class="col-sm-7 col-form-label">Statutory Pension 10%:</label>
+                            <div class="col-sm-5">
+                                <input type="number" class="form-control" id="statPension" value="0">
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="saccoShare" class="col-sm-7 col-form-label">SACCO Share Contribution:</label>
+                            <div class="col-sm-5">
+                                <input type="number" class="form-control" id="saccoShare" value="0">
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="bankLoan1" class="col-sm-7 col-form-label">Bank Loan 1:</label>
+                            <div class="col-sm-5">
+                                <input type="number" class="form-control" id="bankLoan1" value="0">
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="bankLoan2" class="col-sm-7 col-form-label">Bank Loan 2:</label>
+                            <div class="col-sm-5">
+                                <input type="number" class="form-control" id="bankLoan2" value="0">
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="saccoPrincipal" class="col-sm-7 col-form-label">SACCO Loan Principal:</label>
+                            <div class="col-sm-5">
+                                <input type="number" class="form-control" id="saccoPrincipal" value="0">
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="saccoInterest" class="col-sm-7 col-form-label">SACCO Loan Interest:</label>
+                            <div class="col-sm-5">
+                                <input type="number" class="form-control" id="saccoInterest" value="0">
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="otherDed1" class="col-sm-7 col-form-label">Other Deduction 1:</label>
+                            <div class="col-sm-5">
+                                <input type="number" class="form-control" id="otherDed1" value="0">
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="otherDed2" class="col-sm-7 col-form-label">Other Deduction 2:</label>
+                            <div class="col-sm-5">
+                                <input type="number" class="form-control" id="otherDed2" value="0">
+                            </div>
+                        </div>
+
+                        <button type="button" class="btn btn-primary btn-lg w-100 btn-calculate" onclick="calculate()">
+                            Calculate Net Pay
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Right: Results -->
+            <div class="col-lg-6 col-12">
+                <div class="results-section">
+                    <h3>Calculation Results (2026 Rules)</h3>
+                    <div id="results">
+                        <p class="text-center text-muted mt-5">Enter values and click Calculate to see results here</p>
+                    </div>
+                    <div class="disclaimer">
+                        <strong>Disclaimer:</strong> These results are estimates based on current rules and may slightly vary from official KRA calculations due to rounding, specific exemptions, or future updates.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function calculate() {
+            // Get all inputs
+            const basicPay = parseFloat(document.getElementById('basicPay').value) || 0;
+            const commuterAllowance = parseFloat(document.getElementById('commuterAllowance').value) || 0;
+            const housingAllowance = parseFloat(document.getElementById('housingAllowance').value) || 0;
+            const otherRegular = parseFloat(document.getElementById('otherRegular').value) || 0;
+            const leaveAllowance = parseFloat(document.getElementById('leaveAllowance').value) || 0;
+            const otherIrregular = parseFloat(document.getElementById('otherIrregular').value) || 0;
+            const pension = Math.min(parseFloat(document.getElementById('pension').value) || 0, 30000);
+            const mortgage = Math.min(parseFloat(document.getElementById('mortgage').value) || 0, 30000);
+            const pensionOverride = parseFloat(document.getElementById('pensionOverride').value) || 0;
+            const insurance = parseFloat(document.getElementById('insurance').value) || 0;
+            const helb = parseFloat(document.getElementById('helb').value) || 0;
+            const statPension = parseFloat(document.getElementById('statPension').value) || 0;
+            const saccoShare = parseFloat(document.getElementById('saccoShare').value) || 0;
+            const bankLoan1 = parseFloat(document.getElementById('bankLoan1').value) || 0;
+            const bankLoan2 = parseFloat(document.getElementById('bankLoan2').value) || 0;
+            const saccoPrincipal = parseFloat(document.getElementById('saccoPrincipal').value) || 0;
+            const saccoInterest = parseFloat(document.getElementById('saccoInterest').value) || 0;
+            const otherDed1 = parseFloat(document.getElementById('otherDed1').value) || 0;
+            const otherDed2 = parseFloat(document.getElementById('otherDed2').value) || 0;
+
+            // Calculations (2026 - using current confirmed rates)
+            const contribBase = pensionOverride > 0 ? pensionOverride : basicPay + commuterAllowance + housingAllowance + otherRegular;
+            const grossTaxable = contribBase + leaveAllowance + otherIrregular;
+
+            const nssf = Math.min(0.06 * contribBase, 6480); // 2026 NSSF max employee contribution
+            const shif = 0.0275 * grossTaxable;
+            const housingLevy = 0.015 * grossTaxable;
+
+            const insuranceRelief = Math.min(0.15 * insurance, 5000);
+
+            const netTaxable = grossTaxable - (nssf + shif + housingLevy + pension + mortgage + insuranceRelief);
+
+            // PAYE calculation (2026 rates - pending Finance Bill confirmation)
+            let payeGross = 0;
+            payeGross += Math.min(netTaxable, 24000) * 0.10;
+            if (netTaxable > 24000) payeGross += Math.min(netTaxable - 24000, 8333) * 0.25;
+            if (netTaxable > 32333) payeGross += Math.min(netTaxable - 32333, 467667) * 0.30;
+            if (netTaxable > 500000) payeGross += Math.min(netTaxable - 500000, 300000) * 0.325;
+            if (netTaxable > 800000) payeGross += (netTaxable - 800000) * 0.35;
+
+            const personalRelief = 2400;
+            const netPaye = Math.max(payeGross - personalRelief, 0);
+
+            const extraDeds = helb + statPension + saccoShare + bankLoan1 + bankLoan2 + saccoPrincipal + saccoInterest + otherDed1 + otherDed2;
+
+            const totalDeds = netPaye + nssf + shif + housingLevy + extraDeds;
+            const netPay = grossTaxable - totalDeds;
+
+            // Display results in 2-column format
+            document.getElementById('results').innerHTML = `
+                <div class="result-row row">
+                    <div class="col-8 result-label">Contribution Base:</div>
+                    <div class="col-4 result-value">KES ${contribBase.toFixed(2)}</div>
+                </div>
+                <div class="result-row row">
+                    <div class="col-8 result-label">Gross Taxable Earnings:</div>
+                    <div class="col-4 result-value">KES ${grossTaxable.toFixed(2)}</div>
+                </div>
+                <div class="result-row row">
+                    <div class="col-8 result-label">NSSF (Employee):</div>
+                    <div class="col-4 result-value">KES ${nssf.toFixed(2)}</div>
+                </div>
+                <div class="result-row row">
+                    <div class="col-8 result-label">SHIF (2.75%):</div>
+                    <div class="col-4 result-value">KES ${shif.toFixed(2)}</div>
+                </div>
+                <div class="result-row row">
+                    <div class="col-8 result-label">Housing Levy (Employee 1.5%):</div>
+                    <div class="col-4 result-value">KES ${housingLevy.toFixed(2)}</div>
+                </div>
+                <div class="result-row row">
+                    <div class="col-8 result-label">Net Taxable Amount:</div>
+                    <div class="col-4 result-value">KES ${netTaxable.toFixed(2)}</div>
+                </div>
+                <div class="result-row row">
+                    <div class="col-8 result-label">PAYE (before relief):</div>
+                    <div class="col-4 result-value">KES ${payeGross.toFixed(2)}</div>
+                </div>
+                <div class="result-row row">
+                    <div class="col-8 result-label">Net PAYE:</div>
+                    <div class="col-4 result-value">KES ${netPaye.toFixed(2)}</div>
+                </div>
+                <div class="result-row row">
+                    <div class="col-8 result-label">Extra Deductions:</div>
+                    <div class="col-4 result-value">KES ${extraDeds.toFixed(2)}</div>
+                </div>
+                <div class="result-row row">
+                    <div class="col-8 result-label">Total Deductions:</div>
+                    <div class="col-4 result-value">KES ${totalDeds.toFixed(2)}</div>
+                </div>
+                <div class="result-row row">
+                    <div class="col-8 result-label">Net Pay:</div>
+                    <div class="col-4 result-value">KES ${netPay.toFixed(2)}</div>
+                </div>
+            `;
+        }
+    </script>
+</body>
+</html>
