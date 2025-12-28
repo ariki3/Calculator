@@ -322,27 +322,7 @@
 </body>
 
 </html>
-<button class="btn btn-success mt-3" onclick="payWithPaystack()">Unlock Premium Features (KES 500)</button>
 
-<script>
-function payWithPaystack() {
-    let handler = PaystackPop.setup({
-        key: 'pk_test_6ac19b78cf6d76c2517016c9e64959d2420296a7', // Replace with your public key (use live for production)
-        email: 'customer@example.com', // Or collect via input
-        amount: 50000, // Amount in kobo (KES 500 = 50000)
-        currency: 'KES',
-        ref: '' + Math.floor((Math.random() * 1000000000) + 1), // Unique ref
-        onClose: function() {
-            alert('Payment cancelled.');
-        },
-        callback: function(response) {
-            alert('Payment successful! Reference: ' + response.reference);
-            // Here: Unlock premium (e.g., show hidden section via JS, or verify on a simple backend later)
-        }
-    });
-    handler.openIframe();
-}
-</script>
 
 
 
