@@ -220,108 +220,119 @@
     </div>
 
     <script>
-        function calculate() {
-            // Get all inputs
-            const basicPay = parseFloat(document.getElementById('basicPay').value) || 0;
-            const commuterAllowance = parseFloat(document.getElementById('commuterAllowance').value) || 0;
-            const housingAllowance = parseFloat(document.getElementById('housingAllowance').value) || 0;
-            const otherRegular = parseFloat(document.getElementById('otherRegular').value) || 0;
-            const leaveAllowance = parseFloat(document.getElementById('leaveAllowance').value) || 0;
-            const otherIrregular = parseFloat(document.getElementById('otherIrregular').value) || 0;
-            const pension = Math.min(parseFloat(document.getElementById('pension').value) || 0, 30000);
-            const mortgage = Math.min(parseFloat(document.getElementById('mortgage').value) || 0, 30000);
-            const pensionOverride = parseFloat(document.getElementById('pensionOverride').value) || 0;
-            const insurance = parseFloat(document.getElementById('insurance').value) || 0;
-            const helb = parseFloat(document.getElementById('helb').value) || 0;
-            const statPension = parseFloat(document.getElementById('statPension').value) || 0;
-            const saccoShare = parseFloat(document.getElementById('saccoShare').value) || 0;
-            const bankLoan1 = parseFloat(document.getElementById('bankLoan1').value) || 0;
-            const bankLoan2 = parseFloat(document.getElementById('bankLoan2').value) || 0;
-            const saccoPrincipal = parseFloat(document.getElementById('saccoPrincipal').value) || 0;
-            const saccoInterest = parseFloat(document.getElementById('saccoInterest').value) || 0;
-            const otherDed1 = parseFloat(document.getElementById('otherDed1').value) || 0;
-            const otherDed2 = parseFloat(document.getElementById('otherDed2').value) || 0;
+function calculate() {
+    // Inputs
+    const basicPay = parseFloat(document.getElementById('basicPay').value) || 0;
+    const commuterAllowance = parseFloat(document.getElementById('commuterAllowance').value) || 0;
+    const housingAllowance = parseFloat(document.getElementById('housingAllowance').value) || 0;
+    const otherRegular = parseFloat(document.getElementById('otherRegular').value) || 0;
+    const leaveAllowance = parseFloat(document.getElementById('leaveAllowance').value) || 0;
+    const otherIrregular = parseFloat(document.getElementById('otherIrregular').value) || 0;
+    const pension = Math.min(parseFloat(document.getElementById('pension').value) || 0, 30000);
+    const mortgage = Math.min(parseFloat(document.getElementById('mortgage').value) || 0, 30000);
+    const pensionOverride = parseFloat(document.getElementById('pensionOverride').value) || 0;
+    const insurance = parseFloat(document.getElementById('insurance').value) || 0;
+    // Extra deductions...
+    const helb = parseFloat(document.getElementById('helb').value) || 0;
+    const statPension = parseFloat(document.getElementById('statPension').value) || 0;
+    const saccoShare = parseFloat(document.getElementById('saccoShare').value) || 0;
+    const bankLoan1 = parseFloat(document.getElementById('bankLoan1').value) || 0;
+    const bankLoan2 = parseFloat(document.getElementById('bankLoan2').value) || 0;
+    const saccoPrincipal = parseFloat(document.getElementById('saccoPrincipal').value) || 0;
+    const saccoInterest = parseFloat(document.getElementById('saccoInterest').value) || 0;
+    const otherDed1 = parseFloat(document.getElementById('otherDed1').value) || 0;
+    const otherDed2 = parseFloat(document.getElementById('otherDed2').value) || 0;
 
-            // Calculations (2026 - using current confirmed rates)
-            const contribBase = pensionOverride > 0 ? pensionOverride : basicPay + commuterAllowance + housingAllowance + otherRegular;
-            const grossTaxable = contribBase + leaveAllowance + otherIrregular;
+    // Key refinement: NSSF base often basic pay only (per sample payslip)
+    // Use pensionOverride if provided, else basicPay (matches payslip's KES 3,024)
+    const nssfBase = pensionOverride > 0 ? pensionOverride : basicPay;  
+    const grossTaxable = basicPay + commuterAllowance + housingAllowance + otherRegular + leaveAllowance + otherIrregular;
 
-            const nssf = Math.min(0.06 * contribBase, 6480); // 2026 NSSF max employee contribution
-            const shif = 0.0275 * grossTaxable;
-            const housingLevy = 0.015 * grossTaxable;
+    // Statutory deductions
+    const nssf = Math.min(0.06 * nssfBase, 6480); // 2026 max KES 6,480
+    const shif = Math.max(0.0275 * grossTaxable, 300); // 2.75% on gross, min 300
+    const housingLevy = 0.015 * grossTaxable; // 1.5% on gross
 
-            const insuranceRelief = Math.min(0.15 * insurance, 5000);
+    const insuranceRelief = Math.min(0.15 * insurance, 5000);
 
-            const netTaxable = grossTaxable - (nssf + shif + housingLevy + pension + mortgage + insuranceRelief);
+    // Net taxable: deduct NSSF, SHIF, Housing Levy, pension, mortgage, insurance relief
+    const netTaxable = grossTaxable - (nssf + shif + housingLevy + pension + mortgage + insuranceRelief);
 
-            // PAYE calculation (2026 rates - pending Finance Bill confirmation)
-            let payeGross = 0;
-            payeGross += Math.min(netTaxable, 24000) * 0.10;
-            if (netTaxable > 24000) payeGross += Math.min(netTaxable - 24000, 8333) * 0.25;
-            if (netTaxable > 32333) payeGross += Math.min(netTaxable - 32333, 467667) * 0.30;
-            if (netTaxable > 500000) payeGross += Math.min(netTaxable - 500000, 300000) * 0.325;
-            if (netTaxable > 800000) payeGross += (netTaxable - 800000) * 0.35;
+    // PAYE (unchanged - 2023 bands still apply)
+    let payeGross = 0;
+    payeGross += Math.min(netTaxable, 24000) * 0.10;
+    if (netTaxable > 24000) payeGross += Math.min(netTaxable - 24000, 8333) * 0.25;
+    if (netTaxable > 32333) payeGross += Math.min(netTaxable - 32333, 467667) * 0.30;
+    if (netTaxable > 500000) payeGross += Math.min(netTaxable - 500000, 300000) * 0.325;
+    if (netTaxable > 800000) payeGross += (netTaxable - 800000) * 0.35;
 
-            const personalRelief = 2400;
-            const netPaye = Math.max(payeGross - personalRelief, 0);
+    const personalRelief = 2400;
+    const netPaye = Math.max(payeGross - personalRelief, 0);
 
-            const extraDeds = helb + statPension + saccoShare + bankLoan1 + bankLoan2 + saccoPrincipal + saccoInterest + otherDed1 + otherDed2;
+    // Extra deductions (post-PAYE)
+    const extraDeds = helb + statPension + saccoShare + bankLoan1 + bankLoan2 + saccoPrincipal + saccoInterest + otherDed1 + otherDed2;
 
-            const totalDeds = netPaye + nssf + shif + housingLevy + extraDeds;
-            const netPay = grossTaxable - totalDeds;
+    // Totals
+    const totalDeds = netPaye + nssf + shif + housingLevy + extraDeds;
+    const netPay = grossTaxable - totalDeds;
 
-            // Display results in 2-column format
-            document.getElementById('results').innerHTML = `
-                <div class="result-row row">
-                    <div class="col-8 result-label">Contribution Base:</div>
-                    <div class="col-4 result-value">KES ${contribBase.toFixed(2)}</div>
-                </div>
-                <div class="result-row row">
-                    <div class="col-8 result-label">Gross Taxable Earnings:</div>
-                    <div class="col-4 result-value">KES ${grossTaxable.toFixed(2)}</div>
-                </div>
-                <div class="result-row row">
-                    <div class="col-8 result-label">NSSF (Employee):</div>
-                    <div class="col-4 result-value">KES ${nssf.toFixed(2)}</div>
-                </div>
-                <div class="result-row row">
-                    <div class="col-8 result-label">SHIF (2.75%):</div>
-                    <div class="col-4 result-value">KES ${shif.toFixed(2)}</div>
-                </div>
-                <div class="result-row row">
-                    <div class="col-8 result-label">Housing Levy (Employee 1.5%):</div>
-                    <div class="col-4 result-value">KES ${housingLevy.toFixed(2)}</div>
-                </div>
-                <div class="result-row row">
-                    <div class="col-8 result-label">Net Taxable Amount:</div>
-                    <div class="col-4 result-value">KES ${netTaxable.toFixed(2)}</div>
-                </div>
-                <div class="result-row row">
-                    <div class="col-8 result-label">PAYE (before relief):</div>
-                    <div class="col-4 result-value">KES ${payeGross.toFixed(2)}</div>
-                </div>
-                <div class="result-row row">
-                    <div class="col-8 result-label">Net PAYE:</div>
-                    <div class="col-4 result-value">KES ${netPaye.toFixed(2)}</div>
-                </div>
-                <div class="result-row row">
-                    <div class="col-8 result-label">Extra Deductions:</div>
-                    <div class="col-4 result-value">KES ${extraDeds.toFixed(2)}</div>
-                </div>
-                <div class="result-row row">
-                    <div class="col-8 result-label">Total Deductions:</div>
-                    <div class="col-4 result-value">KES ${totalDeds.toFixed(2)}</div>
-                </div>
-                <div class="result-row row">
-                    <div class="col-8 result-label">Net Pay:</div>
-                    <div class="col-4 result-value">KES ${netPay.toFixed(2)}</div>
-                </div>
-            `;
+    // Display results
+    document.getElementById('results').innerHTML = `
+        <div class="result-row row">
+            <div class="col-8 result-label">NSSF Base (often Basic Pay):</div>
+            <div class="col-4 result-value">KES ${nssfBase.toFixed(2)}</div>
+        </div>
+        <div class="result-row row">
+            <div class="col-8 result-label">Gross Taxable Earnings:</div>
+            <div class="col-4 result-value">KES ${grossTaxable.toFixed(2)}</div>
+        </div>
+        <div class="result-row row">
+            <div class="col-8 result-label">NSSF (Employee):</div>
+            <div class="col-4 result-value">KES ${nssf.toFixed(2)}</div>
+        </div>
+        <div class="result-row row">
+            <div class="col-8 result-label">SHIF (2.75%):</div>
+            <div class="col-4 result-value">KES ${shif.toFixed(2)}</div>
+        </div>
+        <div class="result-row row">
+            <div class="col-8 result-label">Housing Levy (1.5%):</div>
+            <div class="col-4 result-value">KES ${housingLevy.toFixed(2)}</div>
+        </div>
+        <div class="result-row row">
+            <div class="col-8 result-label">Net Taxable Amount:</div>
+            <div class="col-4 result-value">KES ${netTaxable.toFixed(2)}</div>
+        </div>
+        <div class="result-row row">
+            <div class="col-8 result-label">PAYE (before relief):</div>
+            <div class="col-4 result-value">KES ${payeGross.toFixed(2)}</div>
+        </div>
+        <div class="result-row row">
+            <div class="col-8 result-label">Net PAYE:</div>
+            <div class="col-4 result-value">KES ${netPaye.toFixed(2)}</div>
+        </div>
+        <div class="result-row row">
+            <div class="col-8 result-label">Extra Deductions:</div>
+            <div class="col-4 result-value">KES ${extraDeds.toFixed(2)}</div>
+        </div>
+        <div class="result-row row">
+            <div class="col-8 result-label">Total Deductions:</div>
+            <div class="col-4 result-value">KES ${totalDeds.toFixed(2)}</div>
+        </div>
+        <div class="result-row row">
+            <div class="col-8 result-label">Net Pay:</div>
+            <div class="col-4 result-value">KES ${netPay.toFixed(2)}</div>
+        </div>
+        <div class="result-row row mt-3">
+            <div class="col-12 text-muted small">Note: NSSF uses basic pay base (per common payroll practice). SHIF/Housing on full gross. Minor variations possible due to employer-specific rules or rounding.</div>
+        </div>
+    `;
+}
         }
     </script>
 </body>
 
 </html>
+
 
 
 
