@@ -1,151 +1,271 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kenya PAYE & Net Salary Calculator 2026</title>
-    <meta name="description" content="Accurate Kenya PAYE calculator 2026 with NSSF, SHIF, Housing Levy, reliefs & extra deductions.">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kenya PAYE & Net Salary Calculator 2026</title>
+  <meta name="description" content="Accurate Kenya PAYE calculator 2026 with NSSF, SHIF, Housing Levy, reliefs & extra deductions.">
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Tailwind CSS Play CDN (for quick prototyping) -->
+  <script src="https://cdn.tailwindcss.com"></script>
 
-    <style>
-        body { font-family: 'Inter', sans-serif; background: linear-gradient(135deg, #f0f4ff, #e6e9f0); min-height: 100vh; color: #1a1a2e; }
-        .header { background: #0d6efd; color: white; padding: 1.5rem; text-align: center; box-shadow: 0 4px 12px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 1000; }
-        .container { max-width: 1100px; margin: 2rem auto; padding: 0 15px; }
-        .card { border: none; border-radius: 16px; box-shadow: 0 8px 24px rgba(0,0,0,0.08); overflow: hidden; }
-        .card-header { background: #0d6efd; color: white; font-weight: 600; padding: 1.25rem 1.5rem; }
-        .form-section, .results-section { padding: 1.75rem; background: white; }
-        .results-section { background: #f8fbff; border-left: 4px solid #0d6efd; }
-        .btn-calculate { background: #0d6efd; border: none; font-weight: 600; padding: 0.9rem; transition: all 0.3s; }
-        .btn-calculate:hover { background: #0b5ed7; transform: translateY(-2px); }
-        .result-row { padding: 0.75rem 0; border-bottom: 1px solid #e9ecef; font-size: 0.98rem; }
-        .result-row:last-child { border-bottom: none; font-weight: 700; font-size: 1.15rem; color: #dc3545; }
-        .result-label { font-weight: 600; color: #495057; }
-        .result-value { font-family: 'Courier New', monospace; text-align: right; }
-        .disclaimer { font-size: 0.82rem; color: #6c757d; background: #fff3cd; padding: 0.75rem; border-radius: 8px; margin-top: 1.5rem; }
-        @media (max-width: 992px) { .results-section { border-left: none; border-top: 4px solid #0d6efd; } }
-    </style>
+  <!-- daisyUI CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/daisyui@5/dist/full.min.css" rel="stylesheet" type="text/css" />
+
+  <!-- Optional: Add Inter font -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+          },
+        },
+      },
+    }
+  </script>
 </head>
-<body>
+<body class="min-h-screen bg-base-200 text-base-content">
 
-    <div class="header">
-        <h1 class="mb-0">Kenya PAYE & Net Salary Calculator 2026</h1>
+  <!-- Header -->
+  <header class="bg-primary text-primary-content py-6 shadow-lg">
+    <div class="container mx-auto px-4 text-center">
+      <h1 class="text-3xl md:text-4xl font-bold">Kenya PAYE & Net Salary Calculator 2026</h1>
+    </div>
+  </header>
+
+  <main class="container mx-auto px-4 py-8 max-w-6xl">
+    
+    <!-- About Card -->
+    <div class="card bg-base-100 shadow-xl mb-8">
+      <div class="card-body">
+        <h2 class="card-title">About this Calculator</h2>
+        <p class="mb-2">
+          Estimates your net take-home pay using 2026 Kenyan tax rules.
+        </p>
+        <ul class="list-disc pl-5 text-sm opacity-80 mb-3">
+          <li>PAYE (current bands)</li>
+          <li>NSSF (6% employee, max 6,480)</li>
+          <li>SHIF (2.75%, min 300)</li>
+          <li>Affordable Housing Levy (1.5%)</li>
+          <li>Pension & mortgage relief</li>
+          <li>Extra deductions (HELB, loans, SACCO…)</li>
+        </ul>
+        <p class="text-sm opacity-70">
+          Results are estimates. Minor differences may occur due to payroll rounding or employer rules.
+        </p>
+      </div>
     </div>
 
-    <div class="container">
-        <div class="row g-4 mt-4">
-            <div class="col-lg-6">
-                <div class="card">
-                    <div class="card-header">Enter Earnings & Deductions</div>
-                    <div class="form-section">
-                        <form id="calculatorForm">
-                            <h6 class="mb-3 text-primary">Regular Earnings</h6>
-                            <div class="row mb-2"><label class="col-7 col-form-label">Basic Pay</label><div class="col-5"><input type="number" class="form-control" id="basicPay" value="0"></div></div>
-                            <div class="row mb-2"><label class="col-7 col-form-label">Commuter & Fuel</label><div class="col-5"><input type="number" class="form-control" id="commuterAllowance" value="0"></div></div>
-                            <div class="row mb-2"><label class="col-7 col-form-label">Housing Allowance</label><div class="col-5"><input type="number" class="form-control" id="housingAllowance" value="0"></div></div>
-                            <div class="row mb-3"><label class="col-7 col-form-label">Other Regular</label><div class="col-5"><input type="number" class="form-control" id="otherRegular" value="0"></div></div>
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+      <!-- Input Form -->
+      <div class="card bg-base-100 shadow-xl">
+        <div class="card-body">
+          <h2 class="card-title mb-4">Enter Your Details</h2>
 
-                            <h6 class="mb-3 text-primary">Irregular Earnings</h6>
-                            <div class="row mb-2"><label class="col-7 col-form-label">Leave/Bonus</label><div class="col-5"><input type="number" class="form-control" id="leaveAllowance" value="0"></div></div>
-                            <div class="row mb-3"><label class="col-7 col-form-label">Other Irregular</label><div class="col-5"><input type="number" class="form-control" id="otherIrregular" value="0"></div></div>
-
-                            <h6 class="mb-3 text-primary">Reliefs & Contributions</h6>
-                            <div class="row mb-2"><label class="col-7 col-form-label">Pension (max 30k)</label><div class="col-5"><input type="number" class="form-control" id="pension" value="0"></div></div>
-                            <div class="row mb-2"><label class="col-7 col-form-label">Mortgage Interest (max 30k)</label><div class="col-5"><input type="number" class="form-control" id="mortgage" value="0"></div></div>
-                            <div class="row mb-2"><label class="col-7 col-form-label">Pensionable Pay Override</label><div class="col-5"><input type="number" class="form-control" id="pensionOverride" value="0" placeholder="0 = basic"></div></div>
-                            <div class="row mb-3"><label class="col-7 col-form-label">Insurance Premiums</label><div class="col-5"><input type="number" class="form-control" id="insurance" value="0"></div></div>
-
-                            <h6 class="mb-3 text-primary">Extra Deductions</h6>
-                            <div class="row mb-2"><label class="col-7 col-form-label">HELB Loan</label><div class="col-5"><input type="number" class="form-control" id="helb" value="0"></div></div>
-                            <div class="row mb-2"><label class="col-7 col-form-label">Statutory Pension 10%</label><div class="col-5"><input type="number" class="form-control" id="statPension" value="0"></div></div>
-                            <div class="row mb-2"><label class="col-7 col-form-label">SACCO Shares</label><div class="col-5"><input type="number" class="form-control" id="saccoShare" value="0"></div></div>
-                            <div class="row mb-2"><label class="col-7 col-form-label">Bank Loan 1</label><div class="col-5"><input type="number" class="form-control" id="bankLoan1" value="0"></div></div>
-                            <div class="row mb-2"><label class="col-7 col-form-label">Bank Loan 2</label><div class="col-5"><input type="number" class="form-control" id="bankLoan2" value="0"></div></div>
-
-                            <button type="button" class="btn btn-primary btn-calculate w-100 mt-4" onclick="calculate()">Calculate Net Pay</button>
-                        </form>
-                    </div>
-                </div>
+          <!-- Regular Earnings -->
+          <div class="mb-6">
+            <h3 class="font-semibold mb-2 text-primary">Regular Earnings</h3>
+            <div class="space-y-3">
+              <label class="form-control">
+                <div class="label"><span>Basic Pay</span></div>
+                <input type="number" id="basicPay" value="0" class="input input-bordered w-full" />
+              </label>
+              <label class="form-control">
+                <div class="label"><span>Commuter & Fuel Allowance</span></div>
+                <input type="number" id="commuterAllowance" value="0" class="input input-bordered w-full" />
+              </label>
+              <label class="form-control">
+                <div class="label"><span>Housing Allowance</span></div>
+                <input type="number" id="housingAllowance" value="0" class="input input-bordered w-full" />
+              </label>
+              <label class="form-control">
+                <div class="label"><span>Other Regular Allowances</span></div>
+                <input type="number" id="otherRegular" value="0" class="input input-bordered w-full" />
+              </label>
             </div>
+          </div>
 
-            <div class="col-lg-6">
-                <div class="card">
-                    <div class="card-header">Results (2026 Rules)</div>
-                    <div class="results-section">
-                        <div id="results">
-                            <p class="text-center text-muted py-5">Enter values and click Calculate</p>
-                        </div>
-                        <div class="disclaimer">
-                            <strong>Disclaimer:</strong> Estimates only. May vary slightly due to payroll/rounding rules.
-                        </div>
-                    </div>
-                </div>
+          <!-- Irregular Earnings -->
+          <div class="mb-6">
+            <h3 class="font-semibold mb-2 text-primary">Irregular Earnings</h3>
+            <div class="space-y-3">
+              <label class="form-control">
+                <div class="label"><span>Leave / Bonus</span></div>
+                <input type="number" id="leaveAllowance" value="0" class="input input-bordered w-full" />
+              </label>
+              <label class="form-control">
+                <div class="label"><span>Other Irregular</span></div>
+                <input type="number" id="otherIrregular" value="0" class="input input-bordered w-full" />
+              </label>
             </div>
+          </div>
+
+          <!-- Reliefs -->
+          <div class="mb-6">
+            <h3 class="font-semibold mb-2 text-primary">Reliefs & Contributions</h3>
+            <div class="space-y-3">
+              <label class="form-control">
+                <div class="label"><span>Pension (max 30,000)</span></div>
+                <input type="number" id="pension" value="0" class="input input-bordered w-full" />
+              </label>
+              <label class="form-control">
+                <div class="label"><span>Mortgage Interest (max 30,000)</span></div>
+                <input type="number" id="mortgage" value="0" class="input input-bordered w-full" />
+              </label>
+              <label class="form-control">
+                <div class="label"><span>Pensionable Pay Override</span></div>
+                <input type="number" id="pensionOverride" value="0" placeholder="0 = use basic pay" class="input input-bordered w-full" />
+              </label>
+              <label class="form-control">
+                <div class="label"><span>Insurance Premiums</span></div>
+                <input type="number" id="insurance" value="0" class="input input-bordered w-full" />
+              </label>
+            </div>
+          </div>
+
+          <!-- Extra Deductions -->
+          <div class="mb-6">
+            <h3 class="font-semibold mb-2 text-primary">Extra Deductions</h3>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <label class="form-control">
+                <div class="label"><span>HELB Loan</span></div>
+                <input type="number" id="helb" value="0" class="input input-bordered w-full" />
+              </label>
+              <label class="form-control">
+                <div class="label"><span>Statutory Pension 10%</span></div>
+                <input type="number" id="statPension" value="0" class="input input-bordered w-full" />
+              </label>
+              <label class="form-control">
+                <div class="label"><span>SACCO Shares</span></div>
+                <input type="number" id="saccoShare" value="0" class="input input-bordered w-full" />
+              </label>
+              <label class="form-control">
+                <div class="label"><span>Bank Loan 1</span></div>
+                <input type="number" id="bankLoan1" value="0" class="input input-bordered w-full" />
+              </label>
+              <label class="form-control">
+                <div class="label"><span>Bank Loan 2</span></div>
+                <input type="number" id="bankLoan2" value="0" class="input input-bordered w-full" />
+              </label>
+            </div>
+          </div>
+
+          <button onclick="calculate()" class="btn btn-primary w-full mt-6">Calculate Net Pay</button>
         </div>
+      </div>
+
+      <!-- Results -->
+      <div class="card bg-base-100 shadow-xl">
+        <div class="card-body">
+          <h2 class="card-title mb-4">Results (2026 Rules)</h2>
+          <div id="results" class="prose max-w-none">
+            <p class="text-center py-12 opacity-70">Enter your values and click Calculate Net Pay</p>
+          </div>
+          <div class="alert alert-info mt-6 text-sm">
+            <span><strong>Note:</strong> Estimates only. NSSF often based on basic pay. SHIF & Housing Levy on full gross. Actual payslips may vary slightly.</span>
+          </div>
+        </div>
+      </div>
     </div>
+  </main>
 
-    <script>
-        function calculate() {
-            // Safely get values (|| 0 prevents crash if element missing)
-            const getVal = (id) => parseFloat(document.getElementById(id)?.value) || 0;
+  <script>
+    function calculate() {
+      const getVal = (id) => parseFloat(document.getElementById(id)?.value) || 0;
 
-            const basicPay          = getVal('basicPay');
-            const commuterAllowance = getVal('commuterAllowance');
-            const housingAllowance  = getVal('housingAllowance');
-            const otherRegular      = getVal('otherRegular');
-            const leaveAllowance    = getVal('leaveAllowance');
-            const otherIrregular    = getVal('otherIrregular');
-            const pension           = Math.min(getVal('pension'), 30000);
-            const mortgage          = Math.min(getVal('mortgage'), 30000);
-            const pensionOverride   = getVal('pensionOverride');
-            const insurance         = getVal('insurance');
-            const helb              = getVal('helb');
-            const statPension       = getVal('statPension');
-            const saccoShare        = getVal('saccoShare');
-            const bankLoan1         = getVal('bankLoan1');
-            const bankLoan2         = getVal('bankLoan2');
+      const basicPay          = getVal('basicPay');
+      const commuterAllowance = getVal('commuterAllowance');
+      const housingAllowance  = getVal('housingAllowance');
+      const otherRegular      = getVal('otherRegular');
+      const leaveAllowance    = getVal('leaveAllowance');
+      const otherIrregular    = getVal('otherIrregular');
+      const pension           = Math.min(getVal('pension'), 30000);
+      const mortgage          = Math.min(getVal('mortgage'), 30000);
+      const pensionOverride   = getVal('pensionOverride');
+      const insurance         = getVal('insurance');
+      const helb              = getVal('helb');
+      const statPension       = getVal('statPension');
+      const saccoShare        = getVal('saccoShare');
+      const bankLoan1         = getVal('bankLoan1');
+      const bankLoan2         = getVal('bankLoan2');
 
-            const nssfBase = pensionOverride > 0 ? pensionOverride : basicPay;
-            const grossTaxable = basicPay + commuterAllowance + housingAllowance + otherRegular + leaveAllowance + otherIrregular;
+      const nssfBase = pensionOverride > 0 ? pensionOverride : basicPay;
+      const grossTaxable = basicPay + commuterAllowance + housingAllowance + otherRegular + leaveAllowance + otherIrregular;
 
-            const nssf = Math.min(0.06 * nssfBase, 6480);
-            const shif = Math.max(0.0275 * grossTaxable, 300);
-            const housingLevy = 0.015 * grossTaxable;
-            const insuranceRelief = Math.min(0.15 * insurance, 5000);
+      const nssf = Math.min(0.06 * nssfBase, 6480);
+      const shif = Math.max(0.0275 * grossTaxable, 300);
+      const housingLevy = 0.015 * grossTaxable;
+      const insuranceRelief = Math.min(0.15 * insurance, 5000);
 
-            const netTaxable = grossTaxable - (nssf + shif + housingLevy + pension + mortgage + insuranceRelief);
+      const netTaxable = grossTaxable - (nssf + shif + housingLevy + pension + mortgage + insuranceRelief);
 
-            let payeGross = 0;
-            payeGross += Math.min(netTaxable, 24000) * 0.10;
-            if (netTaxable > 24000) payeGross += Math.min(netTaxable - 24000, 8333) * 0.25;
-            if (netTaxable > 32333) payeGross += Math.min(netTaxable - 32333, 467667) * 0.30;
-            if (netTaxable > 500000) payeGross += Math.min(netTaxable - 500000, 300000) * 0.325;
-            if (netTaxable > 800000) payeGross += (netTaxable - 800000) * 0.35;
+      let payeGross = 0;
+      payeGross += Math.min(netTaxable, 24000) * 0.10;
+      if (netTaxable > 24000) payeGross += Math.min(netTaxable - 24000, 8333) * 0.25;
+      if (netTaxable > 32333) payeGross += Math.min(netTaxable - 32333, 467667) * 0.30;
+      if (netTaxable > 500000) payeGross += Math.min(netTaxable - 500000, 300000) * 0.325;
+      if (netTaxable > 800000) payeGross += (netTaxable - 800000) * 0.35;
 
-            const personalRelief = 2400;
-            const netPaye = Math.max(payeGross - personalRelief, 0);
+      const personalRelief = 2400;
+      const netPaye = Math.max(payeGross - personalRelief, 0);
 
-            const extraDeds = helb + statPension + saccoShare + bankLoan1 + bankLoan2;
+      const extraDeds = helb + statPension + saccoShare + bankLoan1 + bankLoan2;
 
-            const totalDeds = netPaye + nssf + shif + housingLevy + extraDeds;
-            const netPay = grossTaxable - totalDeds;
+      const totalDeds = netPaye + nssf + shif + housingLevy + extraDeds;
+      const netPay = grossTaxable - totalDeds;
 
-            document.getElementById('results').innerHTML = `
-                <div class="result-row row"><div class="col-8 result-label">Gross Taxable</div><div class="col-4 result-value">KES ${grossTaxable.toFixed(2)}</div></div>
-                <div class="result-row row"><div class="col-8 result-label">NSSF</div><div class="col-4 result-value">KES ${nssf.toFixed(2)}</div></div>
-                <div class="result-row row"><div class="col-8 result-label">SHIF</div><div class="col-4 result-value">KES ${shif.toFixed(2)}</div></div>
-                <div class="result-row row"><div class="col-8 result-label">Housing Levy</div><div class="col-4 result-value">KES ${housingLevy.toFixed(2)}</div></div>
-                <div class="result-row row"><div class="col-8 result-label">Net Taxable</div><div class="col-4 result-value">KES ${netTaxable.toFixed(2)}</div></div>
-                <div class="result-row row"><div class="col-8 result-label">PAYE before relief</div><div class="col-4 result-value">KES ${payeGross.toFixed(2)}</div></div>
-                <div class="result-row row"><div class="col-8 result-label">Personal Relief</div><div class="col-4 result-value">-KES ${personalRelief.toFixed(2)}</div></div>
-                <div class="result-row row"><div class="col-8 result-label">Net PAYE</div><div class="col-4 result-value">KES ${netPaye.toFixed(2)}</div></div>
-                <div class="result-row row"><div class="col-8 result-label">Extra Deductions</div><div class="col-4 result-value">KES ${extraDeds.toFixed(2)}</div></div>
-                <div class="result-row row"><div class="col-8 result-label">Total Deductions</div><div class="col-4 result-value">KES ${totalDeds.toFixed(2)}</div></div>
-                <div class="result-row row"><div class="col-8 result-label">Net Pay</div><div class="col-4 result-value">KES ${netPay.toFixed(2)}</div></div>
-                <div class="mt-3 small text-muted">Estimates only – actual may vary slightly.</div>
-            `;
-        }
-    </script>
+      document.getElementById('results').innerHTML = `
+        <div class="space-y-3">
+          <div class="flex justify-between py-2 border-b">
+            <span class="font-medium">Gross Taxable Earnings</span>
+            <span class="font-mono">KES ${grossTaxable.toFixed(2)}</span>
+          </div>
+          <div class="flex justify-between py-2 border-b">
+            <span>NSSF (Employee)</span>
+            <span class="font-mono">KES ${nssf.toFixed(2)}</span>
+          </div>
+          <div class="flex justify-between py-2 border-b">
+            <span>SHIF (2.75%)</span>
+            <span class="font-mono">KES ${shif.toFixed(2)}</span>
+          </div>
+          <div class="flex justify-between py-2 border-b">
+            <span>Housing Levy (1.5%)</span>
+            <span class="font-mono">KES ${housingLevy.toFixed(2)}</span>
+          </div>
+          <div class="flex justify-between py-2 border-b">
+            <span>Net Taxable Amount</span>
+            <span class="font-mono">KES ${netTaxable.toFixed(2)}</span>
+          </div>
+          <div class="flex justify-between py-2 border-b">
+            <span>PAYE before relief</span>
+            <span class="font-mono">KES ${payeGross.toFixed(2)}</span>
+          </div>
+          <div class="flex justify-between py-2 border-b">
+            <span>Personal Relief</span>
+            <span class="font-mono">-KES ${personalRelief.toFixed(2)}</span>
+          </div>
+          <div class="flex justify-between py-2 border-b font-semibold">
+            <span>Net PAYE</span>
+            <span class="font-mono">KES ${netPaye.toFixed(2)}</span>
+          </div>
+          <div class="flex justify-between py-2 border-b">
+            <span>Extra Deductions</span>
+            <span class="font-mono">KES ${extraDeds.toFixed(2)}</span>
+          </div>
+          <div class="flex justify-between py-2 border-b font-semibold">
+            <span>Total Deductions</span>
+            <span class="font-mono">KES ${totalDeds.toFixed(2)}</span>
+          </div>
+          <div class="flex justify-between py-4 text-lg font-bold text-primary">
+            <span>Net Pay</span>
+            <span class="font-mono">KES ${netPay.toFixed(2)}</span>
+          </div>
+        </div>
+      `;
+    }
+  </script>
 </body>
 </html>
