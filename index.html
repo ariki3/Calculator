@@ -6,166 +6,178 @@
   <title>Kenya PAYE & Net Salary Calculator 2026</title>
   <meta name="description" content="Accurate Kenya PAYE calculator 2026 with NSSF, SHIF, Housing Levy, reliefs & extra deductions.">
 
-  <!-- Tailwind CSS Play CDN (for quick prototyping) -->
+  <!-- Tailwind CSS Play CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
 
   <!-- daisyUI CDN -->
   <link href="https://cdn.jsdelivr.net/npm/daisyui@5/dist/full.min.css" rel="stylesheet" type="text/css" />
 
-  <!-- Optional: Add Inter font -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
   <script>
     tailwind.config = {
       theme: {
         extend: {
-          fontFamily: {
-            sans: ['Inter', 'system-ui', 'sans-serif'],
-          },
+          fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'] },
         },
       },
     }
   </script>
 </head>
-<body class="min-h-screen bg-base-200 text-base-content">
+<body class="min-h-screen bg-gradient-to-br from-base-200 to-base-300 text-base-content">
 
   <!-- Header -->
-  <header class="bg-primary text-primary-content py-6 shadow-lg">
+  <header class="bg-gradient-to-r from-primary to-primary-focus text-primary-content py-6 shadow-lg">
     <div class="container mx-auto px-4 text-center">
-      <h1 class="text-3xl md:text-4xl font-bold">Kenya PAYE & Net Salary Calculator 2026</h1>
+      <h1 class="text-3xl md:text-4xl font-bold tracking-tight">
+        Kenya PAYE & Net Salary Calculator 2026
+      </h1>
+      <p class="mt-2 opacity-90">Accurate take-home pay estimate • 2026 rules</p>
     </div>
   </header>
 
   <main class="container mx-auto px-4 py-8 max-w-6xl">
-    
-    <!-- About Card -->
-    <div class="card bg-base-100 shadow-xl mb-8">
+    <!-- About -->
+    <div class="card bg-base-100 shadow-xl mb-8 border-l-4 border-primary">
       <div class="card-body">
-        <h2 class="card-title">About this Calculator</h2>
-        <p class="mb-2">
-          Estimates your net take-home pay using 2026 Kenyan tax rules.
+        <h2 class="card-title text-primary">About this Calculator</h2>
+        <p class="text-sm opacity-80 mb-3">
+          Estimates your net take-home pay using current 2026 Kenyan tax rules.
         </p>
-        <ul class="list-disc pl-5 text-sm opacity-80 mb-3">
-          <li>PAYE (current bands)</li>
-          <li>NSSF (6% employee, max 6,480)</li>
-          <li>SHIF (2.75%, min 300)</li>
-          <li>Affordable Housing Levy (1.5%)</li>
-          <li>Pension & mortgage relief</li>
-          <li>Extra deductions (HELB, loans, SACCO…)</li>
-        </ul>
-        <p class="text-sm opacity-70">
-          Results are estimates. Minor differences may occur due to payroll rounding or employer rules.
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+          <ul class="list-disc pl-5 space-y-1">
+            <li><strong>PAYE</strong> – current bands</li>
+            <li><strong>NSSF</strong> – 6% employee (max KES 6,480)</li>
+            <li><strong>SHIF</strong> – 2.75% (min KES 300)</li>
+          </ul>
+          <ul class="list-disc pl-5 space-y-1">
+            <li><strong>Housing Levy</strong> – 1.5%</li>
+            <li><strong>Reliefs</strong> – pension & mortgage (max 30k each)</li>
+            <li><strong>Extras</strong> – HELB, loans, SACCO, etc.</li>
+          </ul>
+        </div>
+        <p class="text-xs opacity-70 mt-4 italic">
+          Results are estimates. Minor differences may occur due to payroll rounding or employer-specific rules.
         </p>
       </div>
     </div>
 
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-      <!-- Input Form -->
-      <div class="card bg-base-100 shadow-xl">
-        <div class="card-body">
-          <h2 class="card-title mb-4">Enter Your Details</h2>
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8">
+      <!-- Input Card -->
+      <div class="card bg-base-100 shadow-2xl">
+        <div class="card-body pb-2">
+          <h2 class="card-title text-xl mb-6 text-primary">Enter Your Details</h2>
 
           <!-- Regular Earnings -->
           <div class="mb-6">
-            <h3 class="font-semibold mb-2 text-primary">Regular Earnings</h3>
+            <h3 class="font-semibold text-success mb-3 flex items-center gap-2">
+              <span class="badge badge-success badge-sm">Regular Earnings</span>
+            </h3>
             <div class="space-y-3">
               <label class="form-control">
-                <div class="label"><span>Basic Pay</span></div>
-                <input type="number" id="basicPay" value="0" class="input input-bordered w-full" />
+                <span class="label-text font-medium">Basic Pay</span>
+                <input type="number" id="basicPay" value="0" class="input input-bordered input-success w-full" />
               </label>
               <label class="form-control">
-                <div class="label"><span>Commuter & Fuel Allowance</span></div>
-                <input type="number" id="commuterAllowance" value="0" class="input input-bordered w-full" />
+                <span class="label-text font-medium">Commuter & Fuel</span>
+                <input type="number" id="commuterAllowance" value="0" class="input input-bordered input-success w-full" />
               </label>
               <label class="form-control">
-                <div class="label"><span>Housing Allowance</span></div>
-                <input type="number" id="housingAllowance" value="0" class="input input-bordered w-full" />
+                <span class="label-text font-medium">Housing Allowance</span>
+                <input type="number" id="housingAllowance" value="0" class="input input-bordered input-success w-full" />
               </label>
               <label class="form-control">
-                <div class="label"><span>Other Regular Allowances</span></div>
-                <input type="number" id="otherRegular" value="0" class="input input-bordered w-full" />
+                <span class="label-text font-medium">Other Regular Allowances</span>
+                <input type="number" id="otherRegular" value="0" class="input input-bordered input-success w-full" />
               </label>
             </div>
           </div>
 
-          <!-- Irregular Earnings -->
+          <!-- Irregular -->
           <div class="mb-6">
-            <h3 class="font-semibold mb-2 text-primary">Irregular Earnings</h3>
-            <div class="space-y-3">
+            <h3 class="font-semibold text-info mb-3 flex items-center gap-2">
+              <span class="badge badge-info badge-sm">Irregular Earnings</span>
+            </h3>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <label class="form-control">
-                <div class="label"><span>Leave / Bonus</span></div>
-                <input type="number" id="leaveAllowance" value="0" class="input input-bordered w-full" />
+                <span class="label-text font-medium">Leave / Bonus</span>
+                <input type="number" id="leaveAllowance" value="0" class="input input-bordered input-info w-full" />
               </label>
               <label class="form-control">
-                <div class="label"><span>Other Irregular</span></div>
-                <input type="number" id="otherIrregular" value="0" class="input input-bordered w-full" />
+                <span class="label-text font-medium">Other Irregular</span>
+                <input type="number" id="otherIrregular" value="0" class="input input-bordered input-info w-full" />
               </label>
             </div>
           </div>
 
           <!-- Reliefs -->
           <div class="mb-6">
-            <h3 class="font-semibold mb-2 text-primary">Reliefs & Contributions</h3>
-            <div class="space-y-3">
+            <h3 class="font-semibold text-secondary mb-3 flex items-center gap-2">
+              <span class="badge badge-secondary badge-sm">Reliefs & Contributions</span>
+            </h3>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <label class="form-control">
-                <div class="label"><span>Pension (max 30,000)</span></div>
-                <input type="number" id="pension" value="0" class="input input-bordered w-full" />
+                <span class="label-text font-medium">Pension (max 30k)</span>
+                <input type="number" id="pension" value="0" class="input input-bordered input-secondary w-full" />
               </label>
               <label class="form-control">
-                <div class="label"><span>Mortgage Interest (max 30,000)</span></div>
-                <input type="number" id="mortgage" value="0" class="input input-bordered w-full" />
+                <span class="label-text font-medium">Mortgage Interest (max 30k)</span>
+                <input type="number" id="mortgage" value="0" class="input input-bordered input-secondary w-full" />
               </label>
               <label class="form-control">
-                <div class="label"><span>Pensionable Pay Override</span></div>
-                <input type="number" id="pensionOverride" value="0" placeholder="0 = use basic pay" class="input input-bordered w-full" />
+                <span class="label-text font-medium">Pensionable Pay Override</span>
+                <input type="number" id="pensionOverride" value="0" placeholder="0 = basic pay" class="input input-bordered input-secondary w-full" />
               </label>
               <label class="form-control">
-                <div class="label"><span>Insurance Premiums</span></div>
-                <input type="number" id="insurance" value="0" class="input input-bordered w-full" />
+                <span class="label-text font-medium">Insurance Premiums</span>
+                <input type="number" id="insurance" value="0" class="input input-bordered input-secondary w-full" />
               </label>
             </div>
           </div>
 
           <!-- Extra Deductions -->
           <div class="mb-6">
-            <h3 class="font-semibold mb-2 text-primary">Extra Deductions</h3>
+            <h3 class="font-semibold text-warning mb-3 flex items-center gap-2">
+              <span class="badge badge-warning badge-sm">Extra Deductions</span>
+            </h3>
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <label class="form-control">
-                <div class="label"><span>HELB Loan</span></div>
-                <input type="number" id="helb" value="0" class="input input-bordered w-full" />
+                <span class="label-text font-medium">HELB Loan</span>
+                <input type="number" id="helb" value="0" class="input input-bordered input-warning w-full" />
               </label>
               <label class="form-control">
-                <div class="label"><span>Statutory Pension 10%</span></div>
-                <input type="number" id="statPension" value="0" class="input input-bordered w-full" />
+                <span class="label-text font-medium">Statutory Pension 10%</span>
+                <input type="number" id="statPension" value="0" class="input input-bordered input-warning w-full" />
               </label>
               <label class="form-control">
-                <div class="label"><span>SACCO Shares</span></div>
-                <input type="number" id="saccoShare" value="0" class="input input-bordered w-full" />
+                <span class="label-text font-medium">SACCO Shares</span>
+                <input type="number" id="saccoShare" value="0" class="input input-bordered input-warning w-full" />
               </label>
               <label class="form-control">
-                <div class="label"><span>Bank Loan 1</span></div>
-                <input type="number" id="bankLoan1" value="0" class="input input-bordered w-full" />
+                <span class="label-text font-medium">Bank Loan 1</span>
+                <input type="number" id="bankLoan1" value="0" class="input input-bordered input-warning w-full" />
               </label>
               <label class="form-control">
-                <div class="label"><span>Bank Loan 2</span></div>
-                <input type="number" id="bankLoan2" value="0" class="input input-bordered w-full" />
+                <span class="label-text font-medium">Bank Loan 2</span>
+                <input type="number" id="bankLoan2" value="0" class="input input-bordered input-warning w-full" />
               </label>
             </div>
           </div>
 
-          <button onclick="calculate()" class="btn btn-primary w-full mt-6">Calculate Net Pay</button>
+          <button onclick="calculate()" class="btn btn-primary btn-lg w-full mt-4 shadow-md">
+            Calculate Net Pay
+          </button>
         </div>
       </div>
 
-      <!-- Results -->
-      <div class="card bg-base-100 shadow-xl">
+      <!-- Results Card -->
+      <div class="card bg-base-100 shadow-2xl">
         <div class="card-body">
-          <h2 class="card-title mb-4">Results (2026 Rules)</h2>
-          <div id="results" class="prose max-w-none">
-            <p class="text-center py-12 opacity-70">Enter your values and click Calculate Net Pay</p>
-          </div>
-          <div class="alert alert-info mt-6 text-sm">
-            <span><strong>Note:</strong> Estimates only. NSSF often based on basic pay. SHIF & Housing Levy on full gross. Actual payslips may vary slightly.</span>
+          <h2 class="card-title text-xl mb-6 text-primary">Your Results (2026)</h2>
+          <div id="results" class="space-y-1 text-sm">
+            <p class="text-center py-16 opacity-60 italic">
+              Fill in your details and click Calculate Net Pay
+            </p>
           </div>
         </div>
       </div>
@@ -218,51 +230,35 @@
       const netPay = grossTaxable - totalDeds;
 
       document.getElementById('results').innerHTML = `
-        <div class="space-y-3">
-          <div class="flex justify-between py-2 border-b">
-            <span class="font-medium">Gross Taxable Earnings</span>
-            <span class="font-mono">KES ${grossTaxable.toFixed(2)}</span>
+        <div class="stats stats-vertical lg:stats-horizontal shadow w-full mb-4">
+          <div class="stat place-items-center">
+            <div class="stat-title">Gross Taxable</div>
+            <div class="stat-value text-primary text-2xl">KES ${grossTaxable.toLocaleString('en-KE', {minimumFractionDigits: 2})}</div>
           </div>
-          <div class="flex justify-between py-2 border-b">
-            <span>NSSF (Employee)</span>
-            <span class="font-mono">KES ${nssf.toFixed(2)}</span>
+          <div class="stat place-items-center">
+            <div class="stat-title">Net Pay</div>
+            <div class="stat-value text-success text-3xl font-bold">KES ${netPay.toLocaleString('en-KE', {minimumFractionDigits: 2})}</div>
           </div>
-          <div class="flex justify-between py-2 border-b">
-            <span>SHIF (2.75%)</span>
-            <span class="font-mono">KES ${shif.toFixed(2)}</span>
-          </div>
-          <div class="flex justify-between py-2 border-b">
-            <span>Housing Levy (1.5%)</span>
-            <span class="font-mono">KES ${housingLevy.toFixed(2)}</span>
-          </div>
-          <div class="flex justify-between py-2 border-b">
-            <span>Net Taxable Amount</span>
-            <span class="font-mono">KES ${netTaxable.toFixed(2)}</span>
-          </div>
-          <div class="flex justify-between py-2 border-b">
-            <span>PAYE before relief</span>
-            <span class="font-mono">KES ${payeGross.toFixed(2)}</span>
-          </div>
-          <div class="flex justify-between py-2 border-b">
-            <span>Personal Relief</span>
-            <span class="font-mono">-KES ${personalRelief.toFixed(2)}</span>
-          </div>
-          <div class="flex justify-between py-2 border-b font-semibold">
-            <span>Net PAYE</span>
-            <span class="font-mono">KES ${netPaye.toFixed(2)}</span>
-          </div>
-          <div class="flex justify-between py-2 border-b">
-            <span>Extra Deductions</span>
-            <span class="font-mono">KES ${extraDeds.toFixed(2)}</span>
-          </div>
-          <div class="flex justify-between py-2 border-b font-semibold">
-            <span>Total Deductions</span>
-            <span class="font-mono">KES ${totalDeds.toFixed(2)}</span>
-          </div>
-          <div class="flex justify-between py-4 text-lg font-bold text-primary">
-            <span>Net Pay</span>
-            <span class="font-mono">KES ${netPay.toFixed(2)}</span>
-          </div>
+        </div>
+
+        <div class="overflow-x-auto">
+          <table class="table table-zebra w-full">
+            <tbody>
+              <tr><th>NSSF (Employee)</th><td class="text-right font-mono">KES ${nssf.toFixed(2)}</td></tr>
+              <tr><th>SHIF (2.75%)</th><td class="text-right font-mono">KES ${shif.toFixed(2)}</td></tr>
+              <tr><th>Housing Levy (1.5%)</th><td class="text-right font-mono">KES ${housingLevy.toFixed(2)}</td></tr>
+              <tr><th>Net Taxable Amount</th><td class="text-right font-mono">KES ${netTaxable.toFixed(2)}</td></tr>
+              <tr><th>PAYE before relief</th><td class="text-right font-mono">KES ${payeGross.toFixed(2)}</td></tr>
+              <tr><th>Personal Relief</th><td class="text-right font-mono">-KES ${personalRelief.toFixed(2)}</td></tr>
+              <tr class="bg-base-200"><th class="font-bold">Net PAYE</th><td class="text-right font-bold">KES ${netPaye.toFixed(2)}</td></tr>
+              <tr><th>Extra Deductions</th><td class="text-right font-mono">KES ${extraDeds.toFixed(2)}</td></tr>
+              <tr><th>Total Deductions</th><td class="text-right font-mono">KES ${totalDeds.toFixed(2)}</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="alert alert-info mt-6 text-sm">
+          <span>NSSF typically calculated on basic pay only. SHIF & Housing Levy on full gross. Results are estimates.</span>
         </div>
       `;
     }
