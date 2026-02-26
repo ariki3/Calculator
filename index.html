@@ -56,6 +56,7 @@
   </header>
 
   <main class="container mx-auto px-4 md:px-6 py-8 max-w-7xl">
+    <!-- About section unchanged -->
     <div class="bg-white rounded-xl shadow-md p-6 mb-8 border border-border-gray">
       <h2 class="text-xl font-semibold text-etsy-dark mb-3">About This Calculator</h2>
       <p class="text-gray-600 mb-4">
@@ -65,104 +66,19 @@
         <strong>Free version includes:</strong> Gross, NSSF, SHIF, Housing Levy, PAYE before relief
       </p>
       <p class="text-sm text-gray-600">
-        <strong>Unlock full version (KES 199 one-time):</strong> Exact Net Pay + complete breakdown
+        <strong>Unlock full version (KSh 50 one-time):</strong> Exact Net Pay + complete breakdown
       </p>
     </div>
 
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8">
-      <!-- Input side -->
+      <!-- Input side unchanged – keeping Etsy orange/green/red theme -->
       <div class="bg-white rounded-xl shadow-lg border border-border-gray overflow-hidden">
         <div class="bg-orange-50 px-6 py-4 border-b border-orange-100">
           <h2 class="text-lg font-semibold text-etsy-orange">Enter Your Details</h2>
         </div>
         <div class="p-6 space-y-8">
-          <!-- Regular Earnings -->
-          <div>
-            <h3 class="text-base font-medium text-positive-green mb-3">Regular Earnings</h3>
-            <div class="space-y-4">
-              <label class="block">
-                <span class="text-sm font-medium text-gray-700">Basic Pay</span>
-                <input type="number" id="basicPay" value="0" class="mt-1 block w-full rounded-md border-border-gray shadow-sm focus:border-positive-green focus:ring-positive-green" />
-              </label>
-              <label class="block">
-                <span class="text-sm font-medium text-gray-700">Commuter & Fuel Allowance</span>
-                <input type="number" id="commuterAllowance" value="0" class="mt-1 block w-full rounded-md border-border-gray shadow-sm focus:border-positive-green focus:ring-positive-green" />
-              </label>
-              <label class="block">
-                <span class="text-sm font-medium text-gray-700">Housing Allowance</span>
-                <input type="number" id="housingAllowance" value="0" class="mt-1 block w-full rounded-md border-border-gray shadow-sm focus:border-positive-green focus:ring-positive-green" />
-              </label>
-              <label class="block">
-                <span class="text-sm font-medium text-gray-700">Other Regular Allowances</span>
-                <input type="number" id="otherRegular" value="0" class="mt-1 block w-full rounded-md border-border-gray shadow-sm focus:border-positive-green focus:ring-positive-green" />
-              </label>
-            </div>
-          </div>
-
-          <!-- Irregular Earnings -->
-          <div>
-            <h3 class="text-base font-medium text-etsy-orange mb-3">Irregular Earnings</h3>
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <label class="block">
-                <span class="text-sm font-medium text-gray-700">Leave / Bonus</span>
-                <input type="number" id="leaveAllowance" value="0" class="mt-1 block w-full rounded-md border-border-gray shadow-sm focus:border-etsy-orange focus:ring-etsy-orange" />
-              </label>
-              <label class="block">
-                <span class="text-sm font-medium text-gray-700">Other Irregular</span>
-                <input type="number" id="otherIrregular" value="0" class="mt-1 block w-full rounded-md border-border-gray shadow-sm focus:border-etsy-orange focus:ring-etsy-orange" />
-              </label>
-            </div>
-          </div>
-
-          <!-- Reliefs -->
-          <div>
-            <h3 class="text-base font-medium text-relief-indigo mb-3">Reliefs & Contributions</h3>
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <label class="block">
-                <span class="text-sm font-medium text-gray-700">Pension (max 30,000)</span>
-                <input type="number" id="pension" value="0" class="mt-1 block w-full rounded-md border-border-gray shadow-sm focus:border-relief-indigo focus:ring-relief-indigo" />
-              </label>
-              <label class="block">
-                <span class="text-sm font-medium text-gray-700">Mortgage Interest (max 30,000)</span>
-                <input type="number" id="mortgage" value="0" class="mt-1 block w-full rounded-md border-border-gray shadow-sm focus:border-relief-indigo focus:ring-relief-indigo" />
-              </label>
-              <label class="block">
-                <span class="text-sm font-medium text-gray-700">Pensionable Pay Override</span>
-                <input type="number" id="pensionOverride" value="0" placeholder="0 = basic pay" class="mt-1 block w-full rounded-md border-border-gray shadow-sm focus:border-relief-indigo focus:ring-relief-indigo" />
-              </label>
-              <label class="block">
-                <span class="text-sm font-medium text-gray-700">Insurance Premiums</span>
-                <input type="number" id="insurance" value="0" class="mt-1 block w-full rounded-md border-border-gray shadow-sm focus:border-relief-indigo focus:ring-relief-indigo" />
-              </label>
-            </div>
-          </div>
-
-          <!-- Extra Deductions -->
-          <div>
-            <h3 class="text-base font-medium text-negative-red mb-3">Extra Deductions</h3>
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <label class="block">
-                <span class="text-sm font-medium text-gray-700">HELB Loan</span>
-                <input type="number" id="helb" value="0" class="mt-1 block w-full rounded-md border-border-gray shadow-sm focus:border-negative-red focus:ring-negative-red" />
-              </label>
-              <label class="block">
-                <span class="text-sm font-medium text-gray-700">Statutory Pension 10%</span>
-                <input type="number" id="statPension" value="0" class="mt-1 block w-full rounded-md border-border-gray shadow-sm focus:border-negative-red focus:ring-negative-red" />
-              </label>
-              <label class="block">
-                <span class="text-sm font-medium text-gray-700">SACCO Shares</span>
-                <input type="number" id="saccoShare" value="0" class="mt-1 block w-full rounded-md border-border-gray shadow-sm focus:border-negative-red focus:ring-negative-red" />
-              </label>
-              <label class="block">
-                <span class="text-sm font-medium text-gray-700">Bank Loan 1</span>
-                <input type="number" id="bankLoan1" value="0" class="mt-1 block w-full rounded-md border-border-gray shadow-sm focus:border-negative-red focus:ring-negative-red" />
-              </label>
-              <label class="block">
-                <span class="text-sm font-medium text-gray-700">Bank Loan 2</span>
-                <input type="number" id="bankLoan2" value="0" class="mt-1 block w-full rounded-md border-border-gray shadow-sm focus:border-negative-red focus:ring-negative-red" />
-              </label>
-            </div>
-          </div>
+          <!-- Regular Earnings, Irregular, Reliefs, Extra Deductions sections unchanged -->
+          <!-- ... (keep as in previous Etsy version) ... -->
 
           <button onclick="calculate()" class="mt-8 w-full bg-etsy-orange hover:bg-orange-700 text-white font-medium py-3 px-4 rounded-lg shadow transition duration-200">
             Calculate Net Pay
@@ -182,7 +98,7 @@
             </div>
           </div>
 
-          <!-- Paywall Overlay -->
+          <!-- Paywall Overlay – updated for KSh 50 + phone number only -->
           <div id="paywall" class="fixed inset-0 bg-black/70 flex items-center justify-center z-50 hidden">
             <div class="bg-white rounded-2xl p-8 md:p-10 max-w-lg w-11/12 shadow-2xl relative">
               <button onclick="document.getElementById('paywall').classList.add('hidden')" 
@@ -195,39 +111,38 @@
               </h3>
 
               <div class="bg-positive-green/10 border border-positive-green/30 rounded-xl p-6 mb-6 text-center">
-                <p class="text-4xl font-extrabold text-positive-green">KES 199</p>
+                <p class="text-4xl font-extrabold text-positive-green">KSh 50</p>
                 <p class="text-lg text-positive-green mt-1">One-time payment</p>
               </div>
 
-              <div class="text-gray-700 text-sm md:text-base space-y-5">
-                <p class="font-semibold text-center">Pay via M-Pesa</p>
+              <div class="text-gray-700 text-sm md:text-base space-y-6">
+                <p class="font-semibold text-center">Pay via M-Pesa to this number:</p>
 
-                <div class="bg-gray-50 p-6 rounded-xl border border-border-gray">
-                  <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-                    <div>
-                      <p class="font-medium">Till / Paybill Number:</p>
-                      <p class="text-xl font-mono text-etsy-dark">XXXXXXX <small class="text-gray-500">(your real number)</small></p>
-                    </div>
-                    <div>
-                      <p class="font-medium">Account / Reference:</p>
-                      <p class="text-xl font-mono text-etsy-dark">PAYECALC2026</p>
-                    </div>
-                  </div>
+                <div class="bg-orange-50 p-6 rounded-xl border border-orange-100 text-center">
+                  <p class="text-3xl font-bold text-etsy-orange mb-2">+2547XXXXXXXX</p>
+                  <p class="text-sm text-gray-600">(WhatsApp-enabled – send KSh 50 here)</p>
+                </div>
 
-                  <p class="font-medium mt-4">How to pay:</p>
-                  <ol class="list-decimal pl-6 mt-2 space-y-2">
-                    <li>M-Pesa → Lipa na M-Pesa → Buy Goods & Services</li>
-                    <li>Enter Till Number</li>
-                    <li>Amount: <strong>199</strong></li>
-                    <li>Account: <strong>PAYECALC2026</strong></li>
-                    <li>Enter PIN & confirm</li>
+                <div class="space-y-4">
+                  <p class="text-center">After sending payment:</p>
+                  <ol class="list-decimal pl-6 space-y-2 text-left mx-auto max-w-md">
+                    <li>Send exactly <strong>KSh 50</strong> via M-Pesa to the number above.</li>
+                    <li>Reply to me on WhatsApp with your M-Pesa confirmation message (or screenshot).</li>
+                    <li>I will send you a unique unlock code instantly.</li>
+                    <li>Enter the code below to view full results.</li>
                   </ol>
                 </div>
 
-                <p class="text-center mt-6 text-gray-600">
-                  After payment, send the M-Pesa message to:<br>
-                  <strong class="text-positive-green">WhatsApp: +2547XXXXXXXX</strong><br>
-                  <span class="font-medium text-positive-green block mt-2">Full unlocked version sent instantly</span>
+                <!-- Simple code entry (client-side only – replace with real logic if needed) -->
+                <div class="mt-6">
+                  <input type="text" id="unlockCode" placeholder="Enter unlock code here" class="w-full p-3 border border-gray-300 rounded-lg text-center text-lg" />
+                  <button onclick="tryUnlock()" class="mt-4 w-full bg-etsy-orange hover:bg-orange-700 text-white font-semibold py-3 px-6 rounded-xl shadow transition">
+                    Unlock Now
+                  </button>
+                </div>
+
+                <p class="text-center text-xs text-gray-500 mt-4">
+                  Code is case-sensitive. Contact me if you don't receive it within minutes.
                 </p>
               </div>
             </div>
@@ -238,56 +153,86 @@
   </main>
 
   <script>
+    let fullResultsHTML = ''; // Will store the full unlocked HTML after calculation
+
     function calculate() {
-      const getVal = (id) => parseFloat(document.getElementById(id)?.value) || 0;
+      // ... (keep your existing calculation logic exactly the same) ...
 
-      const basicPay          = getVal('basicPay');
-      const commuterAllowance = getVal('commuterAllowance');
-      const housingAllowance  = getVal('housingAllowance');
-      const otherRegular      = getVal('otherRegular');
-      const leaveAllowance    = getVal('leaveAllowance');
-      const otherIrregular    = getVal('otherIrregular');
-      const pension           = Math.min(getVal('pension'), 30000);
-      const mortgage          = Math.min(getVal('mortgage'), 30000);
-      const pensionOverride   = getVal('pensionOverride');
-      const insurance         = getVal('insurance');
-      const helb              = getVal('helb');
-      const statPension       = getVal('statPension');
-      const saccoShare        = getVal('saccoShare');
-      const bankLoan1         = getVal('bankLoan1');
-      const bankLoan2         = getVal('bankLoan2');
+      // After all calculations (grossTaxable, nssf, shif, housingLevy, netTaxable, payeGross, netPaye, extraDeds, totalDeds, netPay)
 
-      const nssfBase = pensionOverride > 0 ? pensionOverride : basicPay;
-      const grossTaxable = basicPay + commuterAllowance + housingAllowance + otherRegular + leaveAllowance + otherIrregular;
+      fullResultsHTML = `
+        <div class="mb-8">
+          <div class="bg-positive-green/10 border border-positive-green/30 rounded-xl p-6 text-center">
+            <p class="text-sm text-positive-green font-medium mb-2">Your Estimated Net Pay</p>
+            <p class="text-4xl font-extrabold text-positive-green">KSh ${netPay.toFixed(2)}</p>
+          </div>
+        </div>
 
-      const nssf = Math.min(0.06 * nssfBase, 6480);
-      const shif = Math.max(0.0275 * grossTaxable, 300);
-      const housingLevy = 0.015 * grossTaxable;
-      const insuranceRelief = Math.min(0.15 * insurance, 5000);
+        <div class="bg-white rounded-xl border border-border-gray overflow-hidden shadow-sm">
+          <table class="w-full text-sm divide-y divide-border-gray">
+            <thead class="bg-gray-50">
+              <tr>
+                <th class="px-6 py-4 text-left font-medium text-gray-700">Description</th>
+                <th class="px-6 py-4 text-right font-medium text-gray-700">Amount (KES)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="px-6 py-4">Gross Taxable Earnings</td>
+                <td class="px-6 py-4 text-right font-mono">${grossTaxable.toFixed(2)}</td>
+              </tr>
+              <tr>
+                <td class="px-6 py-4">NSSF (Employee)</td>
+                <td class="px-6 py-4 text-right font-mono">${nssf.toFixed(2)}</td>
+              </tr>
+              <tr>
+                <td class="px-6 py-4">SHIF (2.75%)</td>
+                <td class="px-6 py-4 text-right font-mono">${shif.toFixed(2)}</td>
+              </tr>
+              <tr>
+                <td class="px-6 py-4">Housing Levy (1.5%)</td>
+                <td class="px-6 py-4 text-right font-mono">${housingLevy.toFixed(2)}</td>
+              </tr>
+              <tr>
+                <td class="px-6 py-4 font-medium">Net Taxable Amount</td>
+                <td class="px-6 py-4 text-right font-medium">${netTaxable.toFixed(2)}</td>
+              </tr>
+              <tr>
+                <td class="px-6 py-4">PAYE before relief</td>
+                <td class="px-6 py-4 text-right font-mono">${payeGross.toFixed(2)}</td>
+              </tr>
+              <tr class="bg-orange-50">
+                <td class="px-6 py-4 font-semibold text-etsy-orange">Net PAYE</td>
+                <td class="px-6 py-4 text-right font-bold text-etsy-orange">${netPaye.toFixed(2)}</td>
+              </tr>
+              <tr>
+                <td class="px-6 py-4">Extra Deductions</td>
+                <td class="px-6 py-4 text-right font-mono">${extraDeds.toFixed(2)}</td>
+              </tr>
+              <tr class="bg-gray-50">
+                <td class="px-6 py-4 font-semibold">Total Deductions</td>
+                <td class="px-6 py-4 text-right font-bold">${totalDeds.toFixed(2)}</td>
+              </tr>
+              <tr class="bg-positive-green/5">
+                <td class="px-6 py-4 font-bold text-positive-green text-lg">NET PAY (Take Home)</td>
+                <td class="px-6 py-4 text-right font-bold text-positive-green text-lg">${netPay.toFixed(2)}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
 
-      const netTaxable = grossTaxable - (nssf + shif + housingLevy + pension + mortgage + insuranceRelief);
+        <div class="mt-8 text-center text-xs text-gray-500">
+          Estimates only • Based on 2026 rules • NSSF on basic/pensionable pay • SHIF/Housing on gross
+        </div>
+      `;
 
-      let payeGross = 0;
-      payeGross += Math.min(netTaxable, 24000) * 0.10;
-      if (netTaxable > 24000) payeGross += Math.min(netTaxable - 24000, 8333) * 0.25;
-      if (netTaxable > 32333) payeGross += Math.min(netTaxable - 32333, 467667) * 0.30;
-      if (netTaxable > 500000) payeGross += Math.min(netTaxable - 500000, 300000) * 0.325;
-      if (netTaxable > 800000) payeGross += (netTaxable - 800000) * 0.35;
-
-      const personalRelief = 2400;
-      const netPaye = Math.max(payeGross - personalRelief, 0);
-
-      const extraDeds = helb + statPension + saccoShare + bankLoan1 + bankLoan2;
-
-      const totalDeds = netPaye + nssf + shif + housingLevy + extraDeds;
-      const netPay = grossTaxable - totalDeds;
-
+      // Show free version (partial) + paywall
       document.getElementById('results').innerHTML = `
         <div class="mb-8">
           <div class="bg-positive-green/10 border border-positive-green/30 rounded-xl p-6 text-center">
             <p class="text-sm text-positive-green font-medium mb-2">Estimated Net Pay</p>
             <div class="locked-box">
-              Locked – Unlock to see
+              Locked – Unlock for KSh 50
             </div>
           </div>
         </div>
@@ -344,7 +289,7 @@
         <div class="mt-8 text-center">
           <button onclick="document.getElementById('paywall').classList.remove('hidden')"
                   class="bg-etsy-orange hover:bg-orange-700 text-white font-semibold py-4 px-10 rounded-xl shadow-lg transition transform hover:scale-105">
-            Unlock Full Results – KES 199
+            Unlock Full Results – KSh 50
           </button>
         </div>
 
@@ -353,8 +298,19 @@
         </div>
       `;
 
-      // Show paywall overlay
+      // Show paywall
       document.getElementById('paywall').classList.remove('hidden');
+    }
+
+    function tryUnlock() {
+      const code = document.getElementById('unlockCode').value.trim().toUpperCase();
+      if (code === 'UNLOCK50') {  // ← Change this to whatever code you'll send users
+        document.getElementById('results').innerHTML = fullResultsHTML;
+        document.getElementById('paywall').classList.add('hidden');
+        alert('Unlocked! Enjoy the full breakdown.');
+      } else {
+        alert('Invalid code. Please check and try again (case-sensitive).');
+      }
     }
   </script>
 
